@@ -3,7 +3,8 @@ import json
 
 URL = "https://jsonplaceholder.typicode.com"
 
-def obtener_posts_usuario(userid=1):
+def obtener_posts_usuario(userid):
+    """Obtiene los posts de un usuario específico."""
     url = f"{URL}/posts"
     params = {'userId': userid}
     response = requests.get(url, params=params)
@@ -13,7 +14,8 @@ def obtener_posts_usuario(userid=1):
         print(f"- {post['title']}")
     print()
 
-def agregar_post(titulo, cuerpo, userid=1):
+def agregar_post(titulo, cuerpo, userid):
+    """Agrega un nuevo post para un usuario específico."""
     url = f"{URL}/posts"
     data = {
         "title": titulo,
@@ -26,6 +28,7 @@ def agregar_post(titulo, cuerpo, userid=1):
     print()
 
 def actualizar_post(post_id, nuevo_titulo):
+    """Actualiza el título de un post específico."""
     url = f"{URL}/posts/{post_id}"
     data = {
         "title": nuevo_titulo

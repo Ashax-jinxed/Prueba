@@ -4,6 +4,7 @@ import mysql.connector
 app = Flask(__name__)
 
 def conectar():
+    """Establece la conexión a la base de datos MySQL."""
     return mysql.connector.connect(
         host="localhost",
         user="root",
@@ -11,12 +12,12 @@ def conectar():
         database="clientes_bayma"
     )
 
-@app.route('/webhook', methods=['POST'])
+@app.route('/webhook', methods=['POST'])#Crear un endpoint para recibir datos
 def webhook():
     data = request.get_json()
 
     if 'evento' not in data or 'mensaje' not in data or 'timestamp' not in data:
-        return jsonify({'status': 'error', 'mensaje': 'Faltan campos'}), 400
+        return jsonify({'status': 'error', 'mensaje': 'Faltan campos'}), 400 #Validar los campos requeridos
 
 
     try:
@@ -36,7 +37,7 @@ def webhook():
         })
 
     except Exception as e:
-        return jsonify({'status': 'error', 'mensaje': str(e)}), 500
+        return jsonify({'status': 'error', 'mensaje': str(e)}), 500 #Confirma que se ha insertado correctamente
 
 if __name__ == '__main__':
     app.run(debug=True)

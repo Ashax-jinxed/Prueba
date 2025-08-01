@@ -1,6 +1,7 @@
 import mysql.connector
 
 def conectar():
+    """Establece la conexión a la base de datos MySQL."""
     return mysql.connector.connect(
         host="localhost",
         user="root",
@@ -9,6 +10,7 @@ def conectar():
     )
 
 def listar_clientes_activos():
+    """Lista los clientes activos dados de alta en los últimos 60 días."""
     conexion = conectar()
     cursor = conexion.cursor()
     consulta = """
@@ -28,6 +30,7 @@ def listar_clientes_activos():
     conexion.close()
 
 def insertar_cliente():
+    """Agrega un nuevo cliente a la base de datos."""
     nombre = input("Ingrese el nombre del cliente: ").strip()
     email = input("Ingrese el email del cliente: ").strip()
     from datetime import date
@@ -46,6 +49,7 @@ def insertar_cliente():
     conexion.close()
 
 def desactivar_cliente():
+    """Desactiva un cliente por su email."""
     email = input("Ingrese el email del cliente a desactivar: ").strip()
     conexion = conectar()
     cursor = conexion.cursor()
@@ -63,6 +67,8 @@ def desactivar_cliente():
     conexion.close()
 
 def menu():
+    """Muestra el menú principal y gestiona las opciones del usuario."""
+    print("Bienvenido al sistema de gestión de clientes.")
     while True:
         print("\nSelecciona una opción:")
         print("1 - Listar clientes activos dados de alta en los últimos 60 días")
